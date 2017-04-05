@@ -1,2 +1,0 @@
-# summaeh
-Somas com chapéu.
