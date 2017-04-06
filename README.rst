@@ -10,6 +10,16 @@ Somas com chapéu
 
 :License: GPLv3
 
+Instalação
+----------
+
+pip install -r requirements/base.txt
+
+pip install -r requirements/local.txt
+
+python3 manage.py makemigrations
+
+python3 manage.py migrate
 
 Settings
 --------
