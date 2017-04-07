@@ -9,10 +9,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/dev/ref/settings/
 """
 from __future__ import absolute_import, unicode_literals
-
+import os
 import environ
 
-ROOT_DIR = environ.Path(__file__) - 3  # (summaeh/config/settings/base.py - 3 = summaeh/)
+ROOT_DIR = environ.Path(__file__) - 4  # (summaeh/config/settings/base.py - 3 = summaeh/)
 APPS_DIR = ROOT_DIR.path('summaeh')
 
 # Load operating system environment variables and then prepare to use them
@@ -111,11 +111,16 @@ MANAGERS = ADMINS
 # DATABASE CONFIGURATION
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
+#DATABASES = {
+#    'default': env.db('DATABASE_URL', default='postgres:///summaeh'),
+#}
+#DATABASES['default']['ATOMIC_REQUESTS'] = True
 DATABASES = {
-    'default': env.db('DATABASE_URL', default='postgres:///summaeh'),
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
+    }
 }
-DATABASES['default']['ATOMIC_REQUESTS'] = True
-
 
 # GENERAL CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -174,6 +179,15 @@ TEMPLATES = [
             ],
         },
     },
+    {
+        'BACKEND': 'django.template.backends.jinja2.Jinja2',
+        'DIRS': [
+            str(APPS_DIR.path('templates')),
+        ],
+	'APP_DIRS': True,
+        'OPTIONS': {
+        },
+    },
 ]
 
 # See: http://django-crispy-forms.readthedocs.io/en/latest/install.html#template-packs
@@ -208,10 +222,10 @@ MEDIA_URL = '/media/'
 
 # URL Configuration
 # ------------------------------------------------------------------------------
-ROOT_URLCONF = 'config.urls'
+ROOT_URLCONF = 'summaeh.config.urls'
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
-WSGI_APPLICATION = 'config.wsgi.application'
+WSGI_APPLICATION = 'summaeh.config.wsgi.application'
 
 # PASSWORD STORAGE SETTINGS
 # ------------------------------------------------------------------------------
