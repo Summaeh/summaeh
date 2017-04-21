@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="/static/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="/static/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="/static/images/favicon.ico" type="image/x-icon" rel="shortcut icon"/>
 </head>
   <body>
     <nav class="blue accent-2" role="navigation">
@@ -21,6 +22,12 @@
           <ul class="right hide-on-med-and-down">
               <li><a href="{% url 'account_logout' %}">Log out</a></li>
           </ul>
+          <ul class="right hide-on-med-and-down">
+            <li><a href="#">Inserir vídeo-resposta</a></li>
+          </ul>
+          <ul class="right hide-on-med-and-down">
+            <li><a href="#">Inserir vídeo</a></li>
+          </ul>
         {% else %}
           <ul class="right hide-on-med-and-down">
               <li><a href="#">Faça seu cadastro</a></li>
@@ -29,12 +36,6 @@
               <li><a href="#">Login</a></li>
           </ul>
         {% endif %}
-        <ul class="right hide-on-med-and-down">
-          <li><a href="#">Inserir vídeo-resposta</a></li>
-        </ul>
-        <ul class="right hide-on-med-and-down">
-          <li><a href="#">Inserir vídeo</a></li>
-        </ul>
         <ul class="right hide-on-med-and-down">
           <li><a href="https://picasaweb.google.com/109290141523416739431/1Summae2011">Eventos Summaê</a></li>
         </ul>
