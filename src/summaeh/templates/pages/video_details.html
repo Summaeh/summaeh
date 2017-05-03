@@ -1,46 +1,85 @@
 {% extends "base.html" %}
 
 {% block content %}
+<script type="javascript" src="/static/js/materialize.js"></script>
+<script type="javascript" src="/static/js/materialize.min.js"></script>
+
+<script type="javascript">
+  $(document).ready(function() {
+    $('select').material_select();
+  });
+
+  $("#inputId").select();
+</script>
+
+<style type="text/css">
+  .space { 
+    word-spacing: 30px;
+  }
+</style>
+
 <div class = "container">
  <div class="row">
         <div class="col s12 m6">
         <!-- First Card -->
           <div class="card blue darken-3">
             <div class="card-content white-text">
-              <span class="card-title"><-- Nome do video vem aqui --></span>
+              <span class="card-title">Questão Sobre o Método SUMMAÊ</span>
               <p>
-                <br> Autor: Pessoa
-                <br> <-- Inserir data e hora aqui -->
-                <br> Sobre o vídeo: <-- Descricao -->
+                <br> ----------- VIDEO ----------------
+                <br> Autor: Ricardo Wobeto (rpwobeto)
+                <br> 2017-04-05, às 16:49:28
+                <br> Sobre o vídeo: Questão sobre o SUMMAÊ
               </p>
             </div>
-            <div class="card-action">
+            <div class="card-action" style="border-bottom: 1px solid rgba(160, 160, 160, 0.2);">
               <a href="#">Editar Vídeo</a>
               <a href="#">Apagar vídeo</a>
             </div>
-            <div class="card-content white-text">
-              <br> Area de Respostas 
+            <div class="card-content white-text"  style="padding-top: 0px;">
+              <br> Area de Respostas
               <br> Seja o   primeiro a responder: <a href="#">Inserir respostas</a>
             </div>
           </div>
+        </div>
+        <div class="col s12 m6">
           <!-- Second Card -->
           <div class="card blue darken-3">
-            <div class="card-content white-text">
-              <span class="card-title"><-- Nome do video vem aqui --></span>
-              <p>
-                <br> Autor: Pessoa
-                <br> <-- Inserir data e hora aqui -->
-                <br> Sobre o vídeo: <-- Descricao -->
+            <div class="card-content white-text" style="padding-bottom: 0px;">
+              <span class="card-title">Busca de Vídeos</span>
+              <br> 
+              Deseja buscar por:
+              
+              <p style="width:400px;">
+                <input class="with-gap" name="search_type" type="radio" id="id_video"  />
+                <label for="id_video" style="padding-right: 100px;">Id do Vídeo</label> 
+                <input class="with-gap" name="search_type" type="radio" id="id_area"/>
+                <label for="id_area" >Id da Área do Vídeo</label> 
               </p>
+              
+              <p>
+                <input class="with-gap" name="search_type" type="radio" id="title"  />
+                <label for="title" style="padding-right: 63px;" >Titulo</label>
+                <input class="with-gap" name="search_type" type="radio" id="author"  />
+                <label for="author" style="padding-right: 63px;" >Autor</label>
+                <input class="with-gap" name="search_type" type="radio" id="description"  />
+                <label for="description" >Descrição</label>
+              </p>
+
+              <div class="row">
+                <div class="input-field col s8">
+                  <input id="search" type="text" placeholder="Conteúdo da busca">
+                </div>
+              </div>
             </div>
             <div class="card-action">
-              <a href="#">Editar Vídeo</a>
-              <a href="#">Apagar vídeo</a>
+              <a href="#">Buscar</a>
             </div>
           </div>
-          </div>
         </div>
-      </div>
+        
+  </div>
 </div>
+
+
 {% endblock %}
-            
