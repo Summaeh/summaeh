@@ -1,16 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-<script type="javascript" src="/static/js/materialize.js"></script>
-<script type="javascript" src="/static/js/materialize.min.js"></script>
-
-<script type="javascript">
-  $(document).ready(function() {
-    $('select').material_select();
-  });
-
-  $("#inputId").select();
-</script>
 
 <style type="text/css">
   .space { 
@@ -20,7 +10,7 @@
 
 <div class = "container">
  <div class="row">
-        <div class="col s12 m6">
+        <div class="col s12 m8">
         <!-- First Card -->
           <div class="card blue darken-3">
             <div class="card-content white-text">
@@ -42,7 +32,7 @@
             </div>
           </div>
         </div>
-        <div class="col s12 m6">
+        <div class="col s12 m4">
           <!-- Second Card -->
           <div class="card blue darken-3">
             <div class="card-content white-text" style="padding-bottom: 0px;">
@@ -52,16 +42,16 @@
               
               <p style="width:400px;">
                 <input class="with-gap" name="search_type" type="radio" id="id_video"  />
-                <label for="id_video" style="padding-right: 100px;">Id do Vídeo</label> 
+                <label for="id_video" >Id do Vídeo</label> <br>
                 <input class="with-gap" name="search_type" type="radio" id="id_area"/>
                 <label for="id_area" >Id da Área do Vídeo</label> 
               </p>
               
               <p>
                 <input class="with-gap" name="search_type" type="radio" id="title"  />
-                <label for="title" style="padding-right: 63px;" >Titulo</label>
+                <label for="title" >Titulo</label> <br>
                 <input class="with-gap" name="search_type" type="radio" id="author"  />
-                <label for="author" style="padding-right: 63px;" >Autor</label>
+                <label for="author" >Autor</label> <br>
                 <input class="with-gap" name="search_type" type="radio" id="description"  />
                 <label for="description" >Descrição</label>
               </p>
