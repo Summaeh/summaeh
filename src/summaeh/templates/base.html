@@ -16,6 +16,19 @@
   <script type="javascript" src="/static/js/project.js"></script>
 </head>
 
+<style type="text/css">
+  .footer {
+    background-color: #448aff;
+    margin-top: 90px;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    text-align: center;
+    font-family: "Roboto", sans-serif;
+    color: white;
+  }
+
+</style>
+
   <body>
     <nav class="blue accent-2" role="navigation">
       <div class="nav-wrapper container"><a id="logo-container" href="{% url 'home' %}" class="brand-logo">Summaê</a>
@@ -58,5 +71,15 @@
     </nav>
     {% block content %}
     {% endblock %}
+
+    <div class="footer">
+      <img src="{% static "images/summaeh.jpg" %}" alt="My image" style="width: 400px; border-radius: 30%"/>
+      <p>
+        SUMMAÊ <br>
+        Um método diferente para estudar e compartilhar conhecimento <br> 
+        Contato: Prof. Ricardo Fragelli - fragelli@unb.br <br>
+      </p>
+    <div>
+
   </body>
 </html>
