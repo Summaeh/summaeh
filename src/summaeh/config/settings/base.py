@@ -33,6 +33,9 @@ if READ_DOT_ENV_FILE:
 # APP CONFIGURATION
 # ------------------------------------------------------------------------------
 DJANGO_APPS = [
+    # Summaeh
+    'summaeh.videos',
+
     # Default Django apps:
     'django.contrib.auth',
     'django.contrib.contenttypes',
