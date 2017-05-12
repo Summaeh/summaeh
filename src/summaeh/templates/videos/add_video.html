@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Adicionar vídeos{% endblock %}
+
+{% block content %}
+<div class="container">
+    <form action="/videos/salvar_video/" method="post" name="VideoForm">
+        {% csrf_token %}
+        Link do vídeo: <input type="text" name="linkvideo"><br>
+        Nome do vídeo: <input type="text" name="namevideo"><br>
+        <input type="submit" value="Salvar Vídeo">
+    </form>
+</div>
+{% endblock content %}
+

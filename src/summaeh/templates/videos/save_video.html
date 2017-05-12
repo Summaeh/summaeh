@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Salvar vídeos{% endblock %}
+
+{% block content %}
+<div class="container">
+    Tela do novo vídeo: {{ nameVideo }}.
+    <iframe width="560" height="315" src="{{ urlVideo }}" frameborder="0" allowfullscreen></iframe>
+</div>
+{% endblock content %}

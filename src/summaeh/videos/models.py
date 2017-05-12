@@ -14,7 +14,7 @@ class Video(TimeStampedModel):
     link = models.URLField(
         'Link',
         max_length=200,
-        help_text='Link do vídeo no Youtube (ex.: http://youtube.com/...)',
+        help_text='Link do vídeo no Youtube (ex.: https://youtube.com/...)',
         validators=[is_youtube_video],
     )
     name = models.CharField(
@@ -52,7 +52,6 @@ class Video(TimeStampedModel):
     @property
     def num_likes(self):
         return self.likes.filter(type=Like.TYPE_LIKE).count()
-
 
 class Comment(TimeStampedModel):
     """
