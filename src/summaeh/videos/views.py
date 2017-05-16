@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, redirect
 from .validators import youtube_url_normalizer
 from .models import Video
@@ -26,4 +27,21 @@ def add_video(request):
 
 @login_required
 def list_videos(request):
-    return render(request, 'videos/list_videos.html')
+    AMOUNT_PER_PAGE = 3
+
+    videos_list = Video.objects.all()
+
+    paginator = Paginator(videos_list, AMOUNT_PER_PAGE)  # Quantidade de vídeo por página
+
+    page = request.GET.get('page')
+    try:
+        videos = paginator.page(page)
+    except PageNotAnInteger:
+        # Se a página não for um inteiro, vai para a primeira página
+        videos = paginator.page(1)
+    except EmptyPage:
+        # Se a página estiver fora do alcance
+        # mostra o número de páginas como resultado
+        videos = paginator.page(paginator.num_pages)
+
+    return render(request, 'videos/list_videos.html', {'videos_list': videos})
