@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Vídeos{% endblock %}
+
+{% block content %}
+<div class="container">
+     <a href="{% url 'videos:add' %}">Adicionar Vídeo</a>
+</div>
+{% endblock content %}
