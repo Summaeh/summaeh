@@ -45,3 +45,16 @@ def list_videos(request):
         videos = paginator.page(paginator.num_pages)
 
     return render(request, 'videos/list_videos.html', {'videos_list': videos})
+
+@login_required
+def detail_video(request, id_video):
+
+    video = Video.objects.get(id=id_video)
+
+    information = {
+        'video': video,
+        # 'comments_list': comments,
+        # 'likes_amount': likes,
+    }
+
+    return render(request, 'videos/detail_video.html', information)

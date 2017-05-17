@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Detalhes do vídeo{% endblock %}
+
+{% block content %}
+<div class="container">
+        <h3>{{ video.name }}</h3>
+        <br>
+        <iframe src="{{ video.link }}" width="560" height="315"
+               frameborder="0" allowfullscreen></iframe>
+
+</div>
+{% endblock content %}
+

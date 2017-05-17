@@ -9,7 +9,7 @@
     <br>
     <br>
     {% for video in videos_list %}
-        <h3>{{ video.name }}</h3>
+         <a href={% url 'videos:detail' video.id %}>{{ video.name }}</a>
         <br>
         <iframe src="{{ video.link }}" width="560" height="315"
                frameborder="0" allowfullscreen></iframe>
