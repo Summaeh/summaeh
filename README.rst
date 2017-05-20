@@ -8,6 +8,13 @@ Somas com chapéu
      :alt: Built with Cookiecutter Django
 
 
+.. image:: https://travis-ci.org/Summaeh/summaeh.svg?branch=master
+    :target: https://travis-ci.org/Summaeh/summaeh
+
+
+.. image:: https://codecov.io/gh/Summaeh/summaeh/branch/master/graph/badge.svg
+  :target: https://codecov.io/gh/Summaeh/summaeh
+
 :License: GPLv3
 
 Instalação
