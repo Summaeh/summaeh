@@ -1,0 +1,24 @@
+# Main liguage of the project
+language:
+    python
+
+# Versions of python wich your project accepted
+python:
+    - "3.5"
+
+# Setting Django environment
+env:
+    - DJANGO_VERSION=1.10.7
+
+
+# Install some packages before install django
+install:
+
+    - pip install -r requirements/base.txt
+    
+    - pip install -r requirements/local.txt
+    
+    
+script:
+    - python3 manage.py makemigrations
+    - python3 manage.py migrate
