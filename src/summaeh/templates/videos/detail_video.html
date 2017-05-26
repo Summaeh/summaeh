@@ -9,6 +9,17 @@
         <br>
         <iframe src="{{ video.link }}" width="560" height="315"
                frameborder="0" allowfullscreen></iframe>
+        <br>
+        <h4>Likes: {{ likes_amount }}</h4>
+        <br>
+        <h4>Dislikes: {{ dislikes_amount }}</h4>
+        <br>
+
+    {% for comment in comments_list %}
+        <a>{{ comment.comment }}</a>
+    {% empty %}
+            <h3>Ainda não há comentário no vídeo.</h3>
+    {% endfor %}
 
 </div>
 {% endblock content %}

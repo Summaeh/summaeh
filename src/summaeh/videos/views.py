@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, redirect
 from .validators import youtube_url_normalizer
-from .models import Video
+from .models import *
 from .forms import VideoForm
 
 
@@ -40,21 +40,24 @@ def list_videos(request):
         # Se a página não for um inteiro, vai para a primeira página
         videos = paginator.page(1)
     except EmptyPage:
-        # Se a página estiver fora do alcance
-        # mostra o número de páginas como resultado
+        # Se a página estiver fora do alcance vai para a última página existente
         videos = paginator.page(paginator.num_pages)
 
     return render(request, 'videos/list_videos.html', {'videos_list': videos})
 
+
 @login_required
 def detail_video(request, id_video):
-
     video = Video.objects.get(id=id_video)
+    comments = Comment.objects.filter(video=id_video,user=request.user)
+    likes = video.num_likes
+    dislikes = video.num_dislikes
 
     information = {
         'video': video,
-        # 'comments_list': comments,
-        # 'likes_amount': likes,
+        'comments_list': comments,
+        'likes_amount': likes,
+        'dislikes_amount': dislikes,
     }
 
     return render(request, 'videos/detail_video.html', information)
