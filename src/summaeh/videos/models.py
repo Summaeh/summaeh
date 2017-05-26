@@ -53,6 +53,11 @@ class Video(TimeStampedModel):
     def num_likes(self):
         return self.likes.filter(type=Like.TYPE_LIKE).count()
 
+    @property
+    def num_dislikes(self):
+        return self.likes.filter(type=Like.TYPE_DISLIKE).count()
+
+
 class Comment(TimeStampedModel):
     """
     Comentário em um vídeo.
