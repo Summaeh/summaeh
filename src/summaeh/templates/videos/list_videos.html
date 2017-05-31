@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Vídeos{% endblock %}
+
+{% block content %}
+<div class="container">
+    <a href="{% url 'videos:add' %}">Adicionar Vídeo</a>
+    <br>
+    <br>
+    {% for video in videos_list %}
+         <a href={% url 'videos:detail' video.id %}>{{ video.name }}</a>
+        <br>
+        <iframe src="{{ video.link }}" width="560" height="315"
+               frameborder="0" allowfullscreen></iframe>
+        <br>
+        <a>like: {{ video.num_likes }}</a>
+        <a>dislike: {{ video.num_dislikes }}</a>
+        <br>
+    {% empty %}
+        <h3>Ainda não há vídeo cadastrado.</h3>
+    {% endfor %}
+
+    <div class="pagination">
+         <span class="step-links">
+            {% if videos_list.has_previous %}
+                <a href="?page={{ videos_list.previous_page_number }}">Anterior</a>
+            {% endif %}
+
+            <span class="current">
+                Página {{ videos_list.number }} de {{ videos_list.paginator.num_pages }}.
+            </span>
+
+            {% if videos_list.has_next %}
+                <a href="?page={{ videos_list.next_page_number }}">Próxima</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+{% endblock content %}

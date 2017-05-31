@@ -21,7 +21,7 @@ urlpatterns = [
     url(r'^accounts/', include('allauth.urls')),
 
     # Your stuff: custom urls includes go here
-
+    url(r'^videos/', include('summaeh.videos.urls', namespace='videos')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
