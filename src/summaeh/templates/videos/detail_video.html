@@ -11,19 +11,12 @@
           <div class="card">
             <div class="card-content ">
              <h3>{{ video.name }}</h3>
-        <br>
-        <iframe src="{{ video.link }}" width="560" height="315"
-               frameborder="0" allowfullscreen></iframe>
-        <br>
-            <input type="button" id="like" name="{{ video.id }}" value="{{ num_likes }}{% if user_already_like %} Unl{% else %} L{% endif %}ike" />
-        <br>
-              <span class="card-title">Questão Sobre o Método SUMMAÊ</span>
-              <p>
-                <br> ----------- VIDEO ----------------
-                <br> Autor: Ricardo Wobeto (rpwobeto)
-                <br> 2017-04-05, às 16:49:28
-                <br> Sobre o vídeo: Questão sobre o SUMMAÊ
-              </p>
+              <br>
+              <iframe src="{{ video.link }}" width="560" height="315"
+                     frameborder="0" allowfullscreen></iframe>
+              <br>
+                  <input type="button" id="like" name="{{ video.id }}" value="{{ num_likes }}{% if user_already_like %} Unl{% else %} L{% endif %}ike" />
+              <br>
             </div>
             <div class="card-action" style="border-bottom: 1px solid rgba(160, 160, 160, 0.2);">
               <a href="#">Editar Vídeo</a>
