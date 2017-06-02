@@ -73,15 +73,6 @@
     {% block content %}
     {% endblock %}
 
-    <div class="footer">
-      <img src="{% static "images/summaeh.jpg" %}" alt="My image" style="width: 400px; border-radius: 30%"/>
-      <p>
-        SUMMAÊ <br>
-        Um método diferente para estudar e compartilhar conhecimento <br>
-        Contato: Prof. Ricardo Fragelli - fragelli@unb.br <br>
-      </p>
-    <div>
-
     {% block javascript %}
       <!-- Required by Bootstrap v4 Alpha 4 -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
@@ -116,7 +107,17 @@
       </script>
 
       <script src="{% static 'js/project.js' %}"></script>
-      
+
+    {% endblock %}
+
+    <div class="footer">
+      <img src="{% static "images/summaeh.jpg" %}" alt="My image" style="width: 400px; border-radius: 30%"/>
+      <p>
+        SUMMAÊ <br>
+        Um método diferente para estudar e compartilhar conhecimento <br>
+        Contato: Prof. Ricardo Fragelli - fragelli@unb.br <br>
+      </p>
+    <div>
 
   </body>
 </html>
