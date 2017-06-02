@@ -1,10 +1,12 @@
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, redirect
+from django.views.decorators.http import require_POST
+
 from .validators import youtube_url_normalizer
 from .models import *
 from .forms import VideoForm
-
+from django.http import JsonResponse
 
 @login_required
 def add_video(request):
@@ -50,14 +52,43 @@ def list_videos(request):
 def detail_video(request, id_video):
     video = Video.objects.get(id=id_video)
     comments = Comment.objects.filter(video=id_video,user=request.user)
-    likes = video.num_likes
-    dislikes = video.num_dislikes
+    num_likes = Like.objects.filter(video=video).count()
+    user_already_like = Like.objects.filter(video=video, user=request.user).count()
+
+    if user_already_like <= 0:
+        user_already_like = False
+    else:
+        user_already_like = True
 
     information = {
         'video': video,
         'comments_list': comments,
-        'likes_amount': likes,
-        'dislikes_amount': dislikes,
+        'num_likes': num_likes,
+        'user_already_like': user_already_like,
     }
 
     return render(request, 'videos/detail_video.html', information)
+
+
+@login_required
+@require_POST
+def like(request):
+    user = request.user
+    video_id = int(request.POST.get('video_id', None))
+    video = Video.objects.get(id=video_id);
+
+    if Like.objects.filter(user=user, video=video).exists():
+        # Usuário já deu like neste vídeo
+        # remover like/usuário
+        Like.objects.filter(user=user, video=video).delete()
+        like = False
+    else:
+        # adicionar um like para o vídeo
+        Like.objects.create(user=user, video=video)
+        like = True
+
+    num_likes = Like.objects.filter(video=video).count()
+
+    ctx = {'likes_count': num_likes, 'like': like}
+
+    return JsonResponse(ctx)

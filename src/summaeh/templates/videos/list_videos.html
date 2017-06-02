@@ -14,9 +14,6 @@
         <iframe src="{{ video.link }}" width="560" height="315"
                frameborder="0" allowfullscreen></iframe>
         <br>
-        <a>like: {{ video.num_likes }}</a>
-        <a>dislike: {{ video.num_dislikes }}</a>
-        <br>
     {% empty %}
         <h3>Ainda não há vídeo cadastrado.</h3>
     {% endfor %}

@@ -38,25 +38,6 @@ class Video(TimeStampedModel):
         """
         self.comments.create(user=user, comment=comment)
 
-    def like(self, user, type):
-        """
-        Registra um like (ou dislike) de um usuário.
-        
-        Args:
-            user: usuário que faz a requisição
-            type (str): 'like' ou 'dislike'
-        """
-        type = LIKE_TYPES[type]
-        self.likes.create_or_update(user=user, type=type)
-
-    @property
-    def num_likes(self):
-        return self.likes.filter(type=Like.TYPE_LIKE).count()
-
-    @property
-    def num_dislikes(self):
-        return self.likes.filter(type=Like.TYPE_DISLIKE).count()
-
 
 class Comment(TimeStampedModel):
     """
@@ -77,11 +58,8 @@ class Comment(TimeStampedModel):
 
 class Like(TimeStampedModel):
     """
-    Um like (ou dislike) para um vídeo.
+    Um like para um vídeo.
     """
-
-    TYPE_LIKE = 0
-    TYPE_DISLIKE = 1
 
     video = models.ForeignKey(
         Video,
@@ -93,17 +71,3 @@ class Like(TimeStampedModel):
         related_name='likes',
         on_delete=models.PROTECT,
     )
-    type = models.IntegerField(
-        choices=[
-            (TYPE_LIKE, 'like'),
-            (TYPE_DISLIKE, 'dislike'),
-        ],
-    )
-
-    class Meta:
-        unique_together = [
-            ('user', 'video', 'type'),
-        ]
-
-
-LIKE_TYPES = {'like': Like.TYPE_LIKE, 'dislike': Like.TYPE_DISLIKE}
