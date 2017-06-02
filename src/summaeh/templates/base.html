@@ -117,5 +117,41 @@
       </p>
     <div>
 
+    {% block javascript %}
+      <!-- Required by Bootstrap v4 Alpha 4 -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" integrity="sha384-XTs3FgkjiBgo8qjEjBk0tGmf3wPrWtA6coPfQDfFEY8AnYJwjalXCiosYRBIBZX8" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
+
+      <!-- Your stuff: Third-party javascript libraries go here -->
+
+
+      <!-- place project specific Javascript in this file -->
+      <script type="text/javascript">
+        $("#like").click(function(){
+            var button = $(this)
+              $.ajax({
+                   type: "POST",
+                   url: "{% url 'videos:like' %}",
+                   data: {'video_id': $(this).attr('name'), 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+                   dataType: "json",
+                   success: function(response) {
+{#                       alert('Video likes count is now ' + response.likes_count);#}
+                       if(response.like){
+                           button.val(response.likes_count+" Unlike")
+                       }else{
+                           button.val(response.likes_count+" Like")
+                       }
+
+                    }, error: function(rs, e) {
+                       alert(rs.responseText);
+                   }
+              });
+        })
+      </script>
+
+      <script src="{% static 'js/project.js' %}"></script>
+      
+
   </body>
 </html>
