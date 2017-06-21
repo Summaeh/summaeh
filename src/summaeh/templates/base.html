@@ -93,7 +93,7 @@
                    success: function(response) {
 {#                       alert('Video likes count is now ' + response.likes_count);#}
                        if(response.like){
-                           button.val(response.likes_count+" Unlike")
+                           button.val(response.likes_count+" <i class="material-icons">thumb_up</i>")
                        }else{
                            button.val(response.likes_count+" Like")
                        }
