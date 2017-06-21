@@ -3,17 +3,46 @@
 {% block title %}Members{% endblock %}
 
 {% block content %}
+<style>
+  td {
+    padding: 0px;
+  }
+</style>
+
 <div class="container">
   <h3>Usuários:</h3>
 
   <div class="list-group">
-    {% for user in user_list %}
-      <a href="{% url 'users:detail' user.username %}" class="list-group-item">
-        <h6 class="list-group-item-heading">{{ user.username }}</h6>  
-        <h6 class="list-group-item-heading">{{ user.email }} </h6>
-        <h6 class="list-group-item-heading">{{ user.date_joined.day}}/{{ user.date_joined.month}}/{{ user.date_joined.year}}</h6>
-      </a>
-    {% endfor %}
+    <table
+      <tr>
+        <th> Usuário </th>
+        <th> Funcionário </th>
+        <th> Email Ativo </th>
+        <th> Data de Registro </th>
+        <th>Último Login </th>
+      </tr>
+      {% for user in user_list %}
+        <tr>
+          <td>
+            <a href="{% url 'users:detail' user.username %}" class="list-group-item">
+              <h6 class="list-group-item-heading"> {{ user.username }}</h6>
+            </a>
+          </td>
+          <td>
+            <h6 class="list-group-item-heading">
+              {% if user.is_staff %}
+                Sim
+              {% else %}
+                Não
+              {% endif %}
+            </h6>
+          </td>
+          <td> <h6 class="list-group-item-heading"> {{ user.email }} </h6> </td>
+          <td> <h6 class="list-group-item-heading"> {{ user.date_joined.day}}/{{ user.date_joined.month}}/{{ user.date_joined.year}}</h6> </td>
+          <td> <h6 class="list-group-item-heading"> {{ user.last_login.day}}/{{user.last_login.month}}/{{ user.last_login.year}}</h6> </td>
+        </tr>
+      {% endfor %}
+    </table>
   </div>
 </div>
 
