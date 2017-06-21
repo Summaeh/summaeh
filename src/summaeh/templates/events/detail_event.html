@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Detalhes do Evento{% endblock %}
+
+{% block content %}
+<div class="container">
+        <div class="row">
+        <div class="col s12 m8">
+        <!-- First Card -->
+          <div class="card">
+            <div class="card-content ">
+             <ul>
+               <li><strong> Nome = </strong></strong>{{ event.name }}</li>
+               <li> <strong> Data de início = </strong>{{ event.date_start }}</li>
+               <li> <strong> Data de Término = </strong>{{ event.date_end }}</li>
+               <li><strong> Público Estimado = </strong>{{ event.estimated_public }}</li>
+               <li><strong> Descrição = </strong>{{ event.description }}</li>
+               <li><strong> Demias Informações = </strong>{{ event.other_informations }}</li>
+               <li><strong> Local = </strong>{{ event.name_institute }}</li>
+               <li><strong> Endereço = </strong>{{ event.institute_address }}</li>
+             </ul>
+            </div>
+
+          </div>
+        </div>
+
+{% endblock content %}

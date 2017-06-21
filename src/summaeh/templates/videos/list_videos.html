@@ -5,20 +5,35 @@
 
 {% block content %}
 <div class="container">
-    <a href="{% url 'videos:add' %}">Adicionar Vídeo</a>
+<br>
+<a href="{% url 'videos:add' %}" class="waves-effect waves-light btn-large blue darken-3"></i>Adicionar vídeo</a>
+
     <br>
     <br>
+    
     {% for video in videos_list %}
-         <a href={% url 'videos:detail' video.id %}>{{ video.name }}</a>
+         <div class="row">
+         <div class="col s12 m8">
+         <div class="card blue darken-3">
+            <div class="card-content white-text">
+         <a class = "white-text" href={% url 'videos:detail' video.id %}>{{ video.name }}</a>
         <br>
         <iframe src="{{ video.link }}" width="560" height="315"
                frameborder="0" allowfullscreen></iframe>
+               </div>
+        </div>
+        </div>
+        </div>
         <br>
+
     {% empty %}
         <h3>Ainda não há vídeo cadastrado.</h3>
+
     {% endfor %}
 
-    <div class="pagination">
+
+
+    <div class="pagination flow-text">
          <span class="step-links">
             {% if videos_list.has_previous %}
                 <a href="?page={{ videos_list.previous_page_number }}">Anterior</a>

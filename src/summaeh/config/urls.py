@@ -12,8 +12,9 @@ urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name='home'),
     url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name='about'),
     url(r'^video/1/', TemplateView.as_view(template_name='pages/video_details.html'), name='video_detail'),
+    url(r'^event/1/', TemplateView.as_view(template_name='pages/event_details.html'), name='event_detail'),
 
-    # Django Admin, use {% url 'admin:index' %}
+                  # Django Admin, use {% url 'admin:index' %}
     url(settings.ADMIN_URL, admin.site.urls),
 
     # User management
@@ -22,8 +23,9 @@ urlpatterns = [
 
     # Your stuff: custom urls includes go here
     url(r'^videos/', include('summaeh.videos.urls', namespace='videos')),
+    url(r'^events/', include('summaeh.events.urls', namespace='events')),
 
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
     # This allows the error pages to be debugged during development, just visit
