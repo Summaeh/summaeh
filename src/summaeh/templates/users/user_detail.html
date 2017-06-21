@@ -4,15 +4,44 @@
 {% block title %}User: {{ object.username }}{% endblock %}
 
 {% block content %}
+<style>
+  table {
+    margin-left: 50px;
+    width: 80%;
+  }
+
+  td {
+    padding-top: 0px;
+    padding-right: 40px;
+  }
+
+</style>
+
 <div class="container">
 
   <div class="row">
     <div class="col-sm-12">
-
       <h2>{{ object.username }}</h2>
-      {% if object.name %}
-        <p>{{ object.name }}</p>
-      {% endif %}
+      <table
+        <tr>
+          <th>
+            {% if object.name %}
+              Nome
+            {% endif %}
+          </th>
+          <th>Email Ativo:</th>
+          <th>Ultimo Login</th>
+        </tr>
+        <tr>
+          <td>
+            {% if object.name %}
+              {{ object.name }}
+            {% endif %}
+          </td>
+          <td> {{object.email}} </td>
+          <td> {{ object.last_login }} </td>
+        </tr>
+      </table>
     </div>
   </div>
 
@@ -21,9 +50,8 @@
 <div class="row">
 
   <div class="col-sm-12">
-    <a class="btn btn-primary" href="{% url 'users:update' %}" role="button">My Info</a>
+    <a class="btn btn-primary" href="{% url 'users:update' %}" role="button">Nome</a>
     <a class="btn btn-primary" href="{% url 'account_email' %}" role="button">E-Mail</a>
-    <!-- Your Stuff: Custom user template urls -->
   </div>
 
 </div>
@@ -33,4 +61,3 @@
 
 </div>
 {% endblock content %}
-
