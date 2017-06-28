@@ -41,7 +41,7 @@ CACHES = {
 
 # TESTING
 # ------------------------------------------------------------------------------
-TEST_RUNNER = 'django.test.runner.DiscoverRunner'
+#TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 
 # PASSWORD HASHING

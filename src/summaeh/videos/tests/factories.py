@@ -1,7 +1,7 @@
 import factory
 from django.contrib.auth.models import User
 
-from src.summaeh.videos.models import Video
+from summaeh.videos.models import Video
 
 
 class UserFactory(factory.Factory):

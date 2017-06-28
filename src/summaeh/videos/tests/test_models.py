@@ -1,8 +1,9 @@
 '''Test models dependencies'''
 from django.contrib.auth.models import User
-from django.test import TestCase
+from test_plus.test import TestCase
+
 import factory
-from src.summaeh.videos.models import Video
+from summaeh.videos.models import Video
 
 
 class UserFactory(factory.Factory):
