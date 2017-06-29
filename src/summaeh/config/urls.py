@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
+from material.frontend import urls as frontend_urls
 from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
@@ -16,6 +16,7 @@ urlpatterns = [
 
                   # Django Admin, use {% url 'admin:index' %}
     url(settings.ADMIN_URL, admin.site.urls),
+    url(r'', include(frontend_urls)),
 
     # User management
     url(r'^users/', include('summaeh.users.urls', namespace='users')),
