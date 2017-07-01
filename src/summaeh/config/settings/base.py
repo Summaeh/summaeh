@@ -54,6 +54,9 @@ DJANGO_APPS = [
     # 'django.contrib.humanize',
 
     # Admin
+    'material',
+    'material.frontend',
+    'material.admin', # 'material.admin' must be added before 'django.contrib.admin'
     'django.contrib.admin',
 ]
 THIRD_PARTY_APPS = [
@@ -61,6 +64,7 @@ THIRD_PARTY_APPS = [
     'allauth',  # registration
     'allauth.account',  # registration
     'allauth.socialaccount',  # registration
+
 ]
 
 
