@@ -36,6 +36,12 @@ DJANGO_APPS = [
     # Summaeh
     'summaeh.videos',
     'summaeh.events',
+    'summaeh.users.apps.UsersConfig',
+
+    'material',
+    'material.frontend',
+    'material.admin',
+
     # Default Django apps:
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -57,15 +63,9 @@ THIRD_PARTY_APPS = [
     'allauth.socialaccount',  # registration
 ]
 
-# Apps specific for this project go here.
-LOCAL_APPS = [
-    # custom users app
-    'summaeh.users.apps.UsersConfig',
-    # Your stuff: custom apps go here
-]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS
 
 # MIDDLEWARE CONFIGURATION
 # ------------------------------------------------------------------------------

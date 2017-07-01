@@ -3,12 +3,15 @@
 
 {% block title %}Adicionar vídeos{% endblock %}
 
+
+{% load material_form %}
+
 {% block content %}
 <div class="container">
     <form action="" method="post" name="VideoForm">
         {% csrf_token %}
         <table>
-            {{ form.as_table }}
+            {% form form=form %}{% endform %}
         </table>
         <button class="btn waves-effect waves-light blue darken-3" type="submit" name="action">Salvar vídeo
     	<i class="material-icons right">send</i>
