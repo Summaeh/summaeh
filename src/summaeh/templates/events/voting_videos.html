@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Vídeos{% endblock %}
+
+{% block content %}
+    <style>
+        .pesquisa {
+            width: 260px;
+            float: right;
+            position: absolute;
+            top: 100px;
+            right: 100px;
+        }
+
+    </style>
+
+    <!-- CASO A PESQUISA SEJA FIXED, SERÁ NECESSÁRIA ESSA FUNÇÃO PARA NÃO COBRIR O FOOTER
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      (window).scroll(function(){
+        $("#pesquisa").css("top", Math.max(0, 1000 - $(this).scrollTop()));
+      });
+    </script>
+     -->
+    <div class="container">
+    <form action="" method="post" name="VotingForm">
+    {% csrf_token %}
+        <br>
+        <br>
+        {% for video in videos_list %}
+            <div class="row">
+                <div class="col s12 m8">   
+                <p>
+                            <input type="checkbox" id="{{ video.id }}" />
+                            <label for="{{ video.id }}">{{ video.name }}</label>
+                            </p>
+                    <div class="card blue darken-3">
+                        <div class="card-content white-text flow-text">
+                            <br>
+                            <iframe src="{{ video.link }}" width="280" height="158"
+                                    frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <h3>Ainda não há vídeo cadastrado.</h3>
+
+        {% endfor %}
+        <button class="btn waves-effect waves-light blue darken-3" type="submit" name="action">Iniciar votação
+        <i class="material-icons right">send</i>
+    </button>
+    </form>
+    </div>
+
+{% endblock content %}

@@ -40,3 +40,17 @@ def detail_event(request, id_event):
     }
 
     return render(request, 'events/detail_event.html', context)
+
+@login_required
+def create_voting(request, id_event):
+
+    event = Event.objects.get(id=id_event)
+
+    videos_list = Video.objects.filter(event=event)
+
+    context = {
+        'event': event,
+        'videos_list': videos_list,
+    }
+
+    return render(request, 'events/voting_videos.html', context)
