@@ -5,26 +5,58 @@
 {% block title %}Detalhes do Evento{% endblock %}
 
 {% block content %}
-<div class="container">
+    <div class="container">
         <div class="row">
-        <div class="col s12 m8">
-        <!-- First Card -->
-          <div class="card">
-            <div class="card-content ">
-               <ul>
-                 <li><strong> Nome: </strong></strong>{{ event.name }}</li>
-                 <li> <strong> Data de início: </strong>{{ event.date_start }}</li>
-                 <li> <strong> Data de Término:</strong>{{ event.date_end }}</li>
-                 <li><strong> Público Estimado: </strong>{{ event.estimated_public }}</li>
-                 <li><strong> Descrição: </strong>{{ event.description }}</li>
-                 <li><strong> Demias Informações: </strong>{{ event.other_informations }}</li>
-                 <li><strong> Local: </strong>{{ event.name_institute }}</li>
-                 <li><strong> Endereço: </strong>{{ event.institute_address }}</li>
-               </ul>
-             </div>
-          </div>
+            <div class="col s12 m8">
+                <!-- First Card -->
+                <div class="card">
+                    <div class="card-content ">
+                        <ul>
+                            <li><strong> Nome: </strong></strong>{{ event.name }}</li>
+                            <li><strong> Data de início: </strong>{{ event.date_start }}</li>
+                            <li><strong> Data de Término:</strong>{{ event.date_end }}</li>
+                            <li><strong> Público Estimado: </strong>{{ event.estimated_public }}</li>
+                            <li><strong> Descrição: </strong>{{ event.description }}</li>
+                            <li><strong> Demias Informações: </strong>{{ event.other_informations }}</li>
+                            <li><strong> Local: </strong>{{ event.name_institute }}</li>
+                            <li><strong> Endereço: </strong>{{ event.institute_address }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
+        {% for video in videos_list %}
+            <div class="row">
+                <div class="col s12 m8">
+                    <div class="card blue darken-3">
+                        <div class="card-content white-text flow-text">
+                            <a class="white-text" href={% url 'videos:detail' video.id %}>{{ video.name }}</a>
+                            <br>
+                            <iframe src="{{ video.link }}" width="560" height="315"
+                                    frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <h3>Ainda não há vídeo cadastrado.</h3>
+        {% endfor %}
+
+        <div class="pagination flow-text">
+         <span class="step-links">
+            {% if videos_list.has_previous %}
+                <a href="?page={{ videos_list.previous_page_number }}">Anterior</a>
+            {% endif %}
+
+             <span class="current">
+                Página {{ videos_list.number }} de {{ videos_list.paginator.num_pages }}.
+            </span>
+
+             {% if videos_list.has_next %}
+                 <a href="?page={{ videos_list.next_page_number }}">Próxima</a>
+             {% endif %}
+        </span>
         </div>
-        </div>
+    </div>
 
 {% endblock content %}

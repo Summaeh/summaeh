@@ -10,7 +10,11 @@ class Video(TimeStampedModel):
     Representa um vídeo do youtube.
     """
 
-    event = models.ForeignKey('events.Event', related_name='videos')
+    event = models.ForeignKey(
+        'events.Event',
+        related_name='videos',
+        verbose_name='Evento',
+    )
     link = models.URLField(
         'Link',
         max_length=200,
