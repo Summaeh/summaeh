@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from summaeh.videos.models import Video
 
-# Create your views here.
+@login_required
 def list_events(request):
     event_list = Event.objects.all()
     context = {
@@ -17,6 +17,7 @@ def list_events(request):
 @login_required
 def detail_event(request, id_event):
     event = Event.objects.get(id=id_event)
+
     AMOUNT_PER_PAGE = 3
 
     videos_list = Video.objects.filter(event=event)

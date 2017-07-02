@@ -8,6 +8,8 @@
     <div class="container">
         <div class="row">
             <div class="col s12 m8">
+                <br>
+                <a href="{% url 'videos:add' event.id %}" class="waves-effect waves-light btn blue darken-3"><i class="material-icons left">add</i>Adicionar vídeo</a>
                 <!-- First Card -->
                 <div class="card">
                     <div class="card-content ">
@@ -17,7 +19,7 @@
                             <li><strong> Data de Término:</strong>{{ event.date_end }}</li>
                             <li><strong> Público Estimado: </strong>{{ event.estimated_public }}</li>
                             <li><strong> Descrição: </strong>{{ event.description }}</li>
-                            <li><strong> Demias Informações: </strong>{{ event.other_informations }}</li>
+                            <li><strong> Demais Informações: </strong>{{ event.other_informations }}</li>
                             <li><strong> Local: </strong>{{ event.name_institute }}</li>
                             <li><strong> Endereço: </strong>{{ event.institute_address }}</li>
                         </ul>

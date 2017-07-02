@@ -5,11 +5,13 @@ from django.views.decorators.http import require_POST
 
 from .validators import youtube_url_normalizer
 from .models import *
+from summaeh.events.models import Event
 from .forms import VideoForm
 from django.http import JsonResponse
 
 @login_required
-def add_video(request):
+def add_video(request, id_event):
+    event = Event.objects.get(id=id_event)
     ctx = {}
 
     if request.method == 'GET':
@@ -19,10 +21,11 @@ def add_video(request):
 
         if form.is_valid():
             video = form.save(commit=False)
+            video.event = event
             video.user = request.user
             video.link = youtube_url_normalizer(video.link)
             video.save()
-            return redirect('videos:list')
+            return redirect('events:detail', id_event)
 
     return render(request, 'videos/add_video.html', ctx)
 
