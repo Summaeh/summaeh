@@ -24,7 +24,7 @@
     </script>
      -->
     <div class="container">
-    <form action="" method="post" name="VotingForm">
+    <form action="" method="post">
     {% csrf_token %}
         <br>
         <br>
@@ -32,7 +32,7 @@
             <div class="row">
                 <div class="col s12 m8">   
                 <p>
-                            <input type="checkbox" id="{{ video.id }}" />
+                            <input type="checkbox" name="checkvoting" id="{{ video.id }}" value="{{ video.name }}"/>
                             <label for="{{ video.id }}">{{ video.name }}</label>
                             </p>
                     <div class="card blue darken-3">

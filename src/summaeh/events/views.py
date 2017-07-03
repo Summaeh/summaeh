@@ -1,9 +1,9 @@
-from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Event
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from summaeh.videos.models import Video
+from django.shortcuts import render, redirect
 
 @login_required
 def list_events(request):
@@ -48,9 +48,15 @@ def create_voting(request, id_event):
 
     videos_list = Video.objects.filter(event=event)
 
-    context = {
-        'event': event,
-        'videos_list': videos_list,
-    }
+    if request.method == 'GET':
+        context = {
+            'event': event,
+            'videos_list': videos_list,
+        }
+    else:
+        form = request.POST.getlist('checkvoting')
+        print(form)
+
+        return redirect('videos/list_videos.html')
 
     return render(request, 'events/voting_videos.html', context)
