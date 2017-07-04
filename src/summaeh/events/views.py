@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from .models import Event, Voting
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from summaeh.videos.models import Video
+from summaeh.videos.models import Video, Vote
 from django.shortcuts import render, redirect
 
 @login_required
@@ -85,4 +85,24 @@ def create_voting(request, id_event):
 
 @login_required
 def vote_video(request, id_event):
-    return render(request, 'events/vote_video.html')
+    event = Event.objects.get(id=id_event)
+    voting = Voting.objects.get(event=event)
+    videos_list = voting.video.all()
+
+    if request.method == 'GET' :
+        context = {
+            'videos_list': videos_list,
+            'event': event,
+        }
+    else :
+        video_id = request.POST.getlist('radiovoting')
+        print(video_id)
+
+        vote = Vote()
+        vote.user = request.user
+        vote.video = Video.objects.get(id=video_id[0])
+        vote.save()
+
+        return redirect('events:detail', id_event)
+
+    return render(request, 'events/vote_video.html', context)

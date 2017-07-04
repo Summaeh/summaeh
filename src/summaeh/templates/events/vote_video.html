@@ -6,9 +6,34 @@
 
 {% block content %}
     <div class="container">
-        <div class="row">
-            estou aqui
-        </div>
+    <form action="" method="post">
+    {% csrf_token %}
+        <br>
+        <br>
+        {% for video in videos_list %}
+            <div class="row">
+                <div class="col s12 m8">   
+                <p>
+                            <input type="radio" name="radiovoting" id="{{ video.id }}" value="{{ video.id }}"/>
+                            <label for="{{ video.id }}">{{ video.name }}</label>
+                            </p>
+                    <div class="card blue darken-3">
+                        <div class="card-content white-text flow-text">
+                            <br>
+                            <iframe src="{{ video.link }}" width="280" height="158"
+                                    frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <h3>Ainda não há vídeo cadastrado.</h3>
+
+        {% endfor %}
+        <button class="btn waves-effect waves-light blue darken-3" type="submit" name="action">Votar
+        <i class="material-icons right">done</i>
+    </button>
+    </form>
     </div>
 
 {% endblock content %}

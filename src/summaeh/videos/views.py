@@ -95,3 +95,25 @@ def like(request):
     ctx = {'likes_count': num_likes, 'like': like}
 
     return JsonResponse(ctx)
+
+@login_required
+def vote(request):
+    user = request.user
+    video_id = int(request.POST.get('video_id', None))
+    video = Video.objects.get(id=video_id);
+
+    if Vote.objects.filter(user=user, video=video).exists():
+        # Usuário já deu like neste vídeo
+        # remover like/usuário
+        Vote.objects.filter(user=user, video=video).delete()
+        vote = False
+    else:
+        # adicionar um like para o vídeo
+        Vote.objects.create(user=user, video=video)
+        vote = True
+
+    num_votes = Vote.objects.filter(video=video).count()
+
+    ctx = {'votes_count': num_votes, 'vote': vote}
+
+    return JsonResponse(ctx)

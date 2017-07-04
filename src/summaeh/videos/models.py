@@ -75,3 +75,16 @@ class Like(TimeStampedModel):
         related_name='likes',
         on_delete=models.PROTECT,
     )
+
+class Vote(TimeStampedModel):
+
+    video = models.ForeignKey(
+        Video,
+        related_name='votes',
+        on_delete=models.CASCADE
+    )
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name='votes',
+        on_delete=models.PROTECT,
+    )

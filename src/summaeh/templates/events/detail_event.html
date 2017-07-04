@@ -14,6 +14,7 @@
                     <a href="{% url 'events:create_voting' event.id %}" class="waves-effect waves-light btn blue darken-3"><i class="material-icons left">done</i>Criar votação</a>
                 {% else %}
                     <a href="{% url 'events:vote_video' event.id %}" class="waves-effect waves-light btn blue darken-3"><i class="material-icons left">add</i>Votar</a>
+                }
                 {% endif %}
                 <!-- First Card -->
                 <div class="card">
