@@ -27,17 +27,15 @@
     <form action="" method="post">
     {% csrf_token %}
         <br>
-        <br>
         {% for video in videos_list %}
             <div class="row">
-                <div class="col s12 m8">   
+                <div class="col s12 m6 l5">   
                 <p>
                             <input type="checkbox" name="checkvoting" id="{{ video.id }}" value="{{ video.id }}"/>
                             <label for="{{ video.id }}">{{ video.name }}</label>
                             </p>
                     <div class="card blue darken-3">
                         <div class="card-content white-text flow-text">
-                            <br>
                             <iframe src="{{ video.link }}" width="280" height="158"
                                     frameborder="0" allowfullscreen></iframe>
                         </div>
