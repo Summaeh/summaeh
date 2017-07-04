@@ -28,20 +28,23 @@ class Voting(models.Model):
 
     event = models.ForeignKey(
         Event,
-        related_name='events',
+        related_name='votings',
         verbose_name='Evento',
     )
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         verbose_name='Usuário',
-        related_name='events',
+        related_name='votings',
         on_delete=models.PROTECT,
         help_text='Usuário responsável pelo evento.',
     )
     video = models.ManyToManyField(
         'videos.Video',
-        related_name='events',
+        related_name='votings',
     )
     is_open = models.BooleanField(
+        default=False,
+    )
+    already_closed = models.BooleanField(
         default=False,
     )
