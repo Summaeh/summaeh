@@ -7,16 +7,26 @@
 {% load material_form %}
 
 {% block content %}
+<style>
+  form {
+    margin-top: 40px;
+    max-width: 700px;
+  }
+</style>
+
 <div class="container">
+  <br>
+    <h5> Adicionando vídeo para o evento: {{ event.name }} </h3>
     <form action="" method="post" name="VideoForm">
+
         {% csrf_token %}
         <table>
             {% form form=form %}{% endform %}
         </table>
+        <br>
         <button class="btn waves-effect waves-light blue darken-3" type="submit" name="action">Salvar vídeo
     	<i class="material-icons right">send</i>
   	</button>
     </form>
 </div>
 {% endblock content %}
-
