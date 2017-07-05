@@ -9,12 +9,27 @@
         <div class="row">
             <div class="col s12 m8">
                 <br>
-                {% if voting_open is False %}
-                    <a href="{% url 'videos:add' event.id %}" class="waves-effect waves-light btn blue darken-3"><i class="material-icons left">add</i>Adicionar vídeo</a>
-                    <a href="{% url 'events:create_voting' event.id %}" class="waves-effect waves-light btn blue darken-3"><i class="material-icons left">done</i>Criar votação</a>
+                {% if voting_already_close is False %}
+                    {% if voting_open is False %}
+                        <a href="{% url 'videos:add' event.id %}" class="waves-effect waves-light btn blue darken-3"><i class="material-icons left">add</i>Adicionar vídeo</a>
+                        {% if request.user.is_staff %}
+                            <a href="{% url 'events:create_voting' event.id %}" class="waves-effect waves-light btn blue darken-3"><i class="material-icons left">done</i>Criar votação</a>
+                        {% endif %}
+                    {% else %}
+                        {% if voting_open is True and user_already_vote is False %}
+                            <a href="{% url 'events:vote_video' event.id %}" class="waves-effect waves-light btn blue darken-3"><i class="material-icons left">add</i>Votar</a>
+                        {% endif %}
+                        {% if voting_open is True and user_already_vote %}
+                            <a href="{% url 'events:vote_video' event.id %}" class="waves-effect waves-light btn blue darken-3"><i class="material-icons left">repeat</i>Redefinir Voto</a>
+                        {% endif %}
+                        {% if request.user.is_staff %}
+                            <a href="{% url 'events:finish_voting' event.id %}" class="waves-effect waves-light btn blue darken-3"><i class="material-icons left">lock_outline</i>Finalizar Votação</a>
+                        {% endif %}
+                    {% endif %}
                 {% else %}
-                    <a href="{% url 'events:vote_video' event.id %}" class="waves-effect waves-light btn blue darken-3"><i class="material-icons left">add</i>Votar</a>
-                }
+                    {% if request.user.is_staff %}
+                        <a href="{% url 'events:reopen_voting' event.id %}" class="waves-effect waves-light btn blue darken-3"><i class="material-icons left">lock_open</i>Reabrir votação</a>
+                    {% endif %}
                 {% endif %}
                 <!-- First Card -->
                 <div class="card">

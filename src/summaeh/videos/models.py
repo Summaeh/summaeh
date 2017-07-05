@@ -14,6 +14,7 @@ class Video(TimeStampedModel):
         'events.Event',
         related_name='videos',
         verbose_name='Evento',
+        on_delete=models.CASCADE
     )
     link = models.URLField(
         'Link',
@@ -78,6 +79,11 @@ class Like(TimeStampedModel):
 
 class Vote(TimeStampedModel):
 
+    event = models.ForeignKey(
+        'events.Event',
+        related_name='votes',
+        on_delete=models.CASCADE
+    )
     video = models.ForeignKey(
         Video,
         related_name='votes',

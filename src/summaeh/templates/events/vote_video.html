@@ -14,9 +14,15 @@
             <div class="row">
                 <div class="col s12 m8">   
                 <p>
-                            <input type="radio" name="radiovoting" id="{{ video.id }}" value="{{ video.id }}"/>
-                            <label for="{{ video.id }}">{{ video.name }}</label>
-                            </p>
+                            {% if user_video_voted.id != video.id %}
+                                <input type="radio" name="radiovoting" id="{{ video.id }}" value="{{ video.id }}"/>
+                                <label for="{{ video.id }}">{{ video.name }}</label>
+                                </p>
+                            {% else %}
+                                <input type="radio" checked="checked" name="radiovoting" id="{{ video.id }}" value="{{ video.id }}"/>
+                                <label for="{{ video.id }}">{{ video.name }}</label>
+                                </p>
+                            {% endif %}
                     <div class="card blue darken-3">
                         <div class="card-content white-text flow-text">
                             <br>
