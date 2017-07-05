@@ -26,17 +26,11 @@
           <div class="card blue darken-3">
             <div class="card-content white-text" style="min-height: 400px;">
               <span id="title" class="card-title">VÍDEO SUMMAÊ + RECENTE</span>
-              <div id="video" class="col s7" style="">
-              <!-- Vídeo vem aqui  -->
+              <div style="margin-top: 20px;">
+                <h6> <b> Nome:</b> {{ video.name }} <br> </h6>
               </div>
-              <div class="m2" style="margin-top: 70px;">
-                <b> Nome: </b> <br>
-                Questão de Língua Inglesa <br>
-                <b> Área deste vídeo: </b> <br>
-                SM19 <br>
-                <b> Descrição: </b> <br>
-                Questão de LÌNGUA INGLESA
-              </div>
+              <iframe src="{{ video.link }}" width="560" height="315"
+                       frameborder="0" allowfullscreen></iframe>
             </div>
           </div>
         </div>
