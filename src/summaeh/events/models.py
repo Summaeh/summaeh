@@ -48,3 +48,4 @@ class Voting(models.Model):
     already_closed = models.BooleanField(
         default=False,
     )
+    password = models.CharField('Senha', max_length=400, null=True)
