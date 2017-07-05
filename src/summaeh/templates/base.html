@@ -53,7 +53,7 @@
           </ul>
         {% else %}
           <ul class="right hide-on-med-and-down">
-              <li><a href="{{ signup_url }}">Faça seu cadastro</a></li>
+              <li><a href="{% url 'account_signup' %}">Faça seu cadastro</a></li>
           </ul>
           <ul class="right hide-on-med-and-down">
               <li><a href="{% url 'account_login' %}">Login</a></li>

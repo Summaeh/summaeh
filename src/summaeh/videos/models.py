@@ -43,6 +43,10 @@ class Video(TimeStampedModel):
         """
         self.comments.create(user=user, comment=comment)
 
+    def num_votes(self, event):
+        return self.votes.filter(event=event).count()
+
+
 
 class Comment(TimeStampedModel):
     """

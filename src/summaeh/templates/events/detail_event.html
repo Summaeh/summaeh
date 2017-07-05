@@ -59,16 +59,25 @@
                 </div>
             </div>
         </div>
-        {% for video in videos_list %}
+        {% for video, vote in videos_and_votes_list %}
             <div class="row">
                 <div class="col s12 m8">
                     <div class="card blue darken-3">
-                        <div class="card-content white-text flow-text">
-                            <a class="white-text" href={% url 'videos:detail' video.id %}>{{ video.name }}</a>
-                            <br>
-                            <iframe src="{{ video.link }}" width="560" height="315"
-                                    frameborder="0" allowfullscreen></iframe>
-                        </div>
+                        {% if voting_open is False %}
+                            <div class="card-content white-text flow-text">
+                                <a class="white-text" href={% url 'videos:detail' video.id %}>{{ video.name }}</a>
+                                <br>
+                                <iframe src="{{ video.link }}" width="560" height="315"
+                                        frameborder="0" allowfullscreen></iframe>
+                            </div>
+                        {% else %}
+                            <div class="card-content white-text flow-text">
+                                <a class="white-text" href={% url 'videos:detail' video.id %}>{{ video.name }} possue {{ vote }} voto(s)</a>
+                                <br>
+                                <iframe src="{{ video.link }}" width="560" height="315"
+                                        frameborder="0" allowfullscreen></iframe>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>

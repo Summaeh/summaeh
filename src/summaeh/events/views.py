@@ -21,6 +21,7 @@ def detail_event(request, id_event):
     event = Event.objects.get(id=id_event)
     videos_list = Video.objects.filter(event=event)
     user_already_vote = Vote.objects.filter(user=request.user, event=event).exists()
+    videos_and_votes = [(video, video.num_votes(event)) for video in videos_list]
 
     AMOUNT_PER_PAGE = 3
 
@@ -49,7 +50,7 @@ def detail_event(request, id_event):
                 'voting_open': voting.is_open,
                 'voting_already_close': voting.already_closed,
                 'user_already_vote': user_already_vote,
-                'videos_list': videos,
+                'videos_and_votes_list': videos_and_votes,
                 'voting_with_password': True,
             }
         else:
@@ -58,7 +59,7 @@ def detail_event(request, id_event):
                 'voting_open': voting.is_open,
                 'voting_already_close': voting.already_closed,
                 'user_already_vote': user_already_vote,
-                'videos_list': videos,
+                'videos_and_votes_list': videos_and_votes,
                 'voting_with_password': False,
             }
     else:
@@ -67,7 +68,7 @@ def detail_event(request, id_event):
             'voting_open': False,
             'voting_already_close': False,
             'user_already_vote': False,
-            'videos_list': videos,
+            'videos_and_votes_list': videos_and_votes,
             'voting_with_password': False,
         }
 
@@ -154,6 +155,7 @@ def reopen_voting(request, id_event):
 def validate_password(request, id_event):
     event = Event.objects.get(id=id_event)
     voting = Voting.objects.get(event=event)
+    error = False
 
     if request.method == 'POST':
         password = request.POST.get('password', None)
@@ -161,9 +163,14 @@ def validate_password(request, id_event):
         if voting.password == password:
             return redirect('events:vote_video', id_event)
         else:
-            return redirect('events:detail', id_event)
+            error = True
+
+            return render(request, 'events/password_screen.html', {'error': error})
     else:
-        return render(request, 'events/password_screen.html')
+        if request.user.is_staff:
+            return redirect('events:vote_video', id_event)
+        else:
+            return render(request, 'events/password_screen.html', {'error': error})
 
 
 @login_required
@@ -171,6 +178,7 @@ def vote_video(request, id_event):
     event = Event.objects.get(id=id_event)
     voting = Voting.objects.get(event=event)
     videos_list = voting.video.all()
+    videos_and_votes = [(video, video.num_votes(event)) for video in videos_list]
 
     try:
         vote = Vote.objects.get(event=event, user=request.user)
@@ -180,13 +188,13 @@ def vote_video(request, id_event):
     if request.method == 'GET':
         if vote is not None:
             context = {
-                'videos_list': videos_list,
+                'videos_and_votes_list': videos_and_votes,
                 'event': event,
                 'user_video_voted': vote.video
             }
         else:
             context = {
-                'videos_list': videos_list,
+                'videos_and_votes_list': videos_and_votes,
                 'event': event,
                 'user_video_voted': None
             }
