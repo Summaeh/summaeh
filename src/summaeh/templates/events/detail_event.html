@@ -72,7 +72,7 @@
                             </div>
                         {% else %}
                             <div class="card-content white-text flow-text">
-                                <a class="white-text" href={% url 'videos:detail' video.id %}>{{ video.name }} possue {{ vote }} voto(s)</a>
+                                <a class="white-text" href={% url 'videos:detail' video.id %}>{{ video.name }} possui {{ vote }} voto(s)</a>
                                 <br>
                                 <iframe src="{{ video.link }}" width="560" height="315"
                                         frameborder="0" allowfullscreen></iframe>

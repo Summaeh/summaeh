@@ -4,11 +4,9 @@
 {% block title %}Eventos{% endblock %}
 
 {% block content %}
-<div class="container">
-    <br>
+<div class="collection">
     {% for event in event_list %}
-        <a href={% url 'events:detail' event.id %}>{{ event.name }}</a>
-        <br>
+        <a href={% url 'events:detail' event.id %} class="collection-item">{{ event.name }}</a>
     {% empty %}
         <h3>Ainda não há evento cadastrado.</h3>
     {% endfor %}
