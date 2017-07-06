@@ -13,14 +13,8 @@ COPY . /app
 RUN chown -R django /app
 
 COPY ./compose/django/gunicorn.sh /gunicorn.sh
-COPY ./compose/django/entrypoint.sh /entrypoint.sh
-RUN sed -i 's/\r//' /entrypoint.sh \
-    && sed -i 's/\r//' /gunicorn.sh \
-    && chmod +x /entrypoint.sh \
-    && chown django /entrypoint.sh \
+RUN sed -i 's/\r//' /gunicorn.sh \
     && chmod +x /gunicorn.sh \
     && chown django /gunicorn.sh
 
 WORKDIR /app
-
-ENTRYPOINT ["/entrypoint.sh"]
