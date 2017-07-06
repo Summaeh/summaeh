@@ -44,6 +44,9 @@ class Video(TimeStampedModel):
         self.comments.create(user=user, comment=comment)
 
     def num_votes(self, event):
+        """
+        Retorna a quantidade de vídeos um evento possui.
+        """
         return self.votes.filter(event=event).count()
 
 
@@ -81,8 +84,11 @@ class Like(TimeStampedModel):
         on_delete=models.PROTECT,
     )
 
-class Vote(TimeStampedModel):
 
+class Vote(TimeStampedModel):
+    """
+    Um voto para um vídeo.
+    """
     event = models.ForeignKey(
         'events.Event',
         related_name='votes',

@@ -30,22 +30,21 @@ def add_video(request, id_event):
     return render(request, 'videos/add_video.html', ctx)
 
 
-@login_required
 def list_videos(request):
-    AMOUNT_PER_PAGE = 3
+    AMOUNT_PER_PAGE = 5
 
     videos_list = Video.objects.all()
 
-    paginator = Paginator(videos_list, AMOUNT_PER_PAGE)  # Quantidade de vídeo por página
+    paginator = Paginator(videos_list, AMOUNT_PER_PAGE)  # Show AMOUNT_PER_PAGE contacts per page
 
     page = request.GET.get('page')
     try:
         videos = paginator.page(page)
     except PageNotAnInteger:
-        # Se a página não for um inteiro, vai para a primeira página
+        # If page is not an integer, deliver first page.
         videos = paginator.page(1)
     except EmptyPage:
-        # Se a página estiver fora do alcance vai para a última página existente
+        # If page is out of range (e.g. 9999), deliver last page of results.
         videos = paginator.page(paginator.num_pages)
 
     return render(request, 'videos/list_videos.html', {'videos_list': videos})
@@ -81,39 +80,17 @@ def like(request):
     video = Video.objects.get(id=video_id);
 
     if Like.objects.filter(user=user, video=video).exists():
-        # Usuário já deu like neste vídeo
-        # remover like/usuário
+        # User already like this video
+        # remove like/user
         Like.objects.filter(user=user, video=video).delete()
         like = False
     else:
-        # adicionar um like para o vídeo
+        # Add a like to the video
         Like.objects.create(user=user, video=video)
         like = True
 
     num_likes = Like.objects.filter(video=video).count()
 
     ctx = {'likes_count': num_likes, 'like': like}
-
-    return JsonResponse(ctx)
-
-@login_required
-def vote(request):
-    user = request.user
-    video_id = int(request.POST.get('video_id', None))
-    video = Video.objects.get(id=video_id);
-
-    if Vote.objects.filter(user=user, video=video).exists():
-        # Usuário já deu like neste vídeo
-        # remover like/usuário
-        Vote.objects.filter(user=user, video=video).delete()
-        vote = False
-    else:
-        # adicionar um like para o vídeo
-        Vote.objects.create(user=user, video=video)
-        vote = True
-
-    num_votes = Vote.objects.filter(video=video).count()
-
-    ctx = {'votes_count': num_votes, 'vote': vote}
 
     return JsonResponse(ctx)

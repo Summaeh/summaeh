@@ -23,27 +23,26 @@ def detail_event(request, id_event):
     user_already_vote = Vote.objects.filter(user=request.user, event=event).exists()
     videos_and_votes = [(video, video.num_votes(event)) for video in videos_list]
 
-    AMOUNT_PER_PAGE = 3
+    AMOUNT_PER_PAGE = 5
 
     try:
         voting = Voting.objects.get(event=event)
     except Voting.DoesNotExist:
         voting = None
 
-    paginator = Paginator(videos_list, AMOUNT_PER_PAGE)  # Quantidade de vídeo por página
+    paginator = Paginator(videos_list, AMOUNT_PER_PAGE)  # Show AMOUNT_PER_PAGE contacts per page
     page = request.GET.get('page')
 
     try:
         videos = paginator.page(page)
     except PageNotAnInteger:
-        # Se a página não for um inteiro, vai para a primeira página
+        # If page is not an integer, deliver first page.
         videos = paginator.page(1)
     except EmptyPage:
-        # Se a página estiver fora do alcance vai para a última página existente
+        # If page is out of range (e.g. 9999), deliver last page of results.
         videos = paginator.page(paginator.num_pages)
 
-    if voting is not None:
-        print(voting.password)
+    if voting is not None and request.user is not None:
         if voting.password is not None:
             context = {
                 'event': event,
@@ -102,6 +101,7 @@ def create_voting(request, id_event):
 
     return render(request, 'events/voting_videos.html', context)
 
+
 @login_required
 def create_voting_with_password(request, id_event):
     event = Event.objects.get(id=id_event)
@@ -150,6 +150,7 @@ def reopen_voting(request, id_event):
     voting.save()
 
     return redirect('events:detail', id_event)
+
 
 @login_required
 def validate_password(request, id_event):

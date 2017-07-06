@@ -63,7 +63,7 @@
             <div class="row">
                 <div class="col s12 m8">
                     <div class="card blue darken-3">
-                        {% if voting_open is False %}
+                        {% if voting_open is False or vote == 0 %}
                             <div class="card-content white-text flow-text">
                                 <a class="white-text" href={% url 'videos:detail' video.id %}>{{ video.name }}</a>
                                 <br>
