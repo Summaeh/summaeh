@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}Votar em um vídeo do segundo turno{% endblock %}
+
+{% block content %}
+    <div class="container">
+    <form action="" method="post">
+    {% csrf_token %}
+        <br>
+        <br>
+        {% for video, vote in videos_and_votes_list %}
+            <div class="row">
+                <div class="col s12 m8">   
+                <p>
+                            {% if user_video_voted.id != video.id %}
+                                <input type="radio" name="radiovoting" id="{{ video.id }}" value="{{ video.id }}"/>
+                                <label for="{{ video.id }}">{{ video.name }} possue {{ vote }} votos</label>
+                                </p>
+                            {% else %}
+                                <input type="radio" checked="checked" name="radiovoting" id="{{ video.id }}" value="{{ video.id }}"/>
+                                <label for="{{ video.id }}">{{ video.name }} possue {{ vote }} voto(s)</label>
+                                </p>
+                            {% endif %}
+                    <div class="card blue darken-3">
+                        <div class="card-content white-text flow-text">
+                            <br>
+                            <iframe src="{{ video.link }}" width="280" height="158"
+                                    frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+                <h3>Ainda não há vídeo cadastrado.</h3>
+
+        {% endfor %}
+        <button class="btn waves-effect waves-light blue darken-3" type="submit" name="action">Votar
+        <i class="material-icons right">done</i>
+    </button>
+    </form>
+    </div>
+
+{% endblock content %}
