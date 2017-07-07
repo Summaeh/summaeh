@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^reabrir_votacao/(?P<id_event>[0-9]+)/$', views.reopen_voting, name='reopen_voting'),
     url(r'^votar_video/(?P<id_event>[0-9]+)/$', views.vote_video, name='vote_video'),
     url(r'^votar_video_com_senha/(?P<id_event>[0-9]+)/$', views.validate_password, name='vote_video_with_password'),
+    url(r'^segundo_turno/(?P<id_event>[0-9]+)/$', views.create_second_shift, name='create_second_shift'),
 ]

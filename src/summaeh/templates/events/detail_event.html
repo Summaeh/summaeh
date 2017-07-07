@@ -40,6 +40,8 @@
                 {% else %}
                     {% if request.user.is_staff %}
                         <a href="{% url 'events:reopen_voting' event.id %}" class="waves-effect waves-light btn blue darken-3"><i class="material-icons left">lock_open</i>Reabrir votação</a>
+                        <a href="{% url 'events:create_second_shift' event.id %}" class="waves-effect waves-light btn blue darken-3">
+                        <i class="material-icons left">done_all</i>Abrir segundo turno</a>
                     {% endif %}
                 {% endif %}
                 <!-- First Card -->
