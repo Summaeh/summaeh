@@ -102,34 +102,6 @@ def create_voting(request, id_event):
     return render(request, 'events/voting_videos.html', context)
 
 @login_required
-def create_second_shift(request, id_event):
-    event = Event.objects.get(id=id_event)
-    videos_list = Video.objects.filter(event=event)
-
-    if request.method == 'GET':
-        context = {
-            'event': event,
-            'videos_list': videos_list,
-        }
-    else:
-        list_selected_videos = request.POST.getlist('checkvoting')
-
-        voting = Voting()
-        voting.event = Event.objects.get(id=id_event)
-        voting.user = request.user
-        voting.is_open = True
-        voting.already_closed = False
-        voting.save()
-
-        for video_id in list_selected_videos:
-            voting.video.add(Video.objects.get(id=video_id))
-
-        return redirect('events:detail', id_event)
-
-    return render(request, 'events/create_second_shift.html', context)
-
-
-@login_required
 def create_voting_with_password(request, id_event):
     event = Event.objects.get(id=id_event)
     videos_list = Video.objects.filter(event=event)
