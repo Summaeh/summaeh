@@ -12,7 +12,7 @@ from django.http import JsonResponse
 @login_required
 def add_video(request, id_event):
     event = Event.objects.get(id=id_event)
-    ctx = {}
+    ctx = {'event' : event}
 
     if request.method == 'GET':
         ctx['form'] = VideoForm()

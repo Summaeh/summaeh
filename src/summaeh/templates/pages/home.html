@@ -2,8 +2,8 @@
 {% block content %}
 <style type="text/css">
   #video {
-    text-align: center; 
-    border: 1px solid black; 
+    text-align: center;
+    border: 1px solid black;
     min-height: 200px;
     margin-right: 20px;
     margin-top: 50px;
@@ -17,7 +17,7 @@
       <br><br>
       <h1 class="header center blue-text text-accent-2">Summâe - Somas com Chápeu</h1>
       <div class="row center">
-        <h5 class="header col s12 light">Uma descrição legal aqui!</h5>
+        <!-- <h5 class="header col s12 light">Uma descrição legal aqui!</h5> -->
       </div>
 
       <div class="row">
@@ -26,23 +26,11 @@
           <div class="card blue darken-3">
             <div class="card-content white-text" style="min-height: 400px;">
               <span id="title" class="card-title">VÍDEO SUMMAÊ + RECENTE</span>
-              <div id="video" class="col s7" style="">
-                <br> 
-                Vídeo vem aqui <br> 
-                Vídeo vem aqui <br> 
-                Vídeo vem aqui <br> 
-                Vídeo vem aqui <br> 
-                Vídeo vem aqui <br> 
-                Vídeo vem aqui <br> 
+              <div style="margin-top: 20px;">
+                <h6> <b> Nome:</b> {{ video.name }} <br> </h6>
               </div>
-              <div class="m2" style="margin-top: 70px;">
-                <b> Nome: </b> <br>
-                Questão de Língua Inglesa <br>
-                <b> Área deste vídeo: </b> <br>
-                SM19 <br>
-                <b> Descrição: </b> <br>
-                Questão de LÌNGUA INGLESA
-              </div>
+              <iframe src="{{ video.link }}" width="560" height="315"
+                       frameborder="0" allowfullscreen></iframe>
             </div>
           </div>
         </div>
@@ -51,16 +39,16 @@
           <div class="card blue darken-3">
             <div class="card-content white-text" style="padding-bottom: 0px;">
               <span class="card-title">Busca de Vídeos</span>
-              <br> 
+              <br>
               Deseja buscar por:
-              
+
               <p style="width:400px;">
                 <input class="with-gap" name="search_type" type="radio" id="id_video"  />
                 <label for="id_video" >Id do Vídeo</label> <br>
                 <input class="with-gap" name="search_type" type="radio" id="id_area"/>
-                <label for="id_area" >Id da Área do Vídeo</label> 
+                <label for="id_area" >Id da Área do Vídeo</label>
               </p>
-              
+
               <p>
                 <input class="with-gap" name="search_type" type="radio" id="title"  />
                 <label for="title" >Titulo</label> <br>
